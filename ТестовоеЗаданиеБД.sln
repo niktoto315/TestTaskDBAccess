@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.31829.152
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ТестовоеЗаданиеБД", "ТестовоеЗаданиеБД\ТестовоеЗаданиеБД.csproj", "{FA17C6D3-819A-4C36-A54C-591CB4E60139}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{69B9B659-31C2-4A7D-A221-3C6C12B9C736}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
