@@ -30,7 +30,7 @@ namespace ТестовоеЗаданиеБД
         private void InitializeComponent()
         {
             this.GenderInput = new System.Windows.Forms.ComboBox();
-            this.SendBtn = new System.Windows.Forms.Button();
+            this.btnSend = new System.Windows.Forms.Button();
             this.DateInput = new System.Windows.Forms.DateTimePicker();
             this.NameInput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,16 +57,16 @@ namespace ТестовоеЗаданиеБД
             this.GenderInput.TabIndex = 0;
             this.GenderInput.Text = "Мужской";
             // 
-            // SendBtn
+            // btnSend
             // 
-            this.SendBtn.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.SendBtn.Location = new System.Drawing.Point(263, 258);
-            this.SendBtn.Name = "SendBtn";
-            this.SendBtn.Size = new System.Drawing.Size(256, 50);
-            this.SendBtn.TabIndex = 1;
-            this.SendBtn.Text = "Добавить или редактировать";
-            this.SendBtn.UseVisualStyleBackColor = true;
-            this.SendBtn.Click += new System.EventHandler(this.SendBtn_Click);
+            this.btnSend.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.btnSend.Location = new System.Drawing.Point(263, 258);
+            this.btnSend.Name = "btnSend";
+            this.btnSend.Size = new System.Drawing.Size(256, 50);
+            this.btnSend.TabIndex = 1;
+            this.btnSend.Text = "Добавить или редактировать";
+            this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // DateInput
             // 
@@ -192,7 +192,7 @@ namespace ТестовоеЗаданиеБД
             this.Controls.Add(this.label1);
             this.Controls.Add(this.NameInput);
             this.Controls.Add(this.DateInput);
-            this.Controls.Add(this.SendBtn);
+            this.Controls.Add(this.btnSend);
             this.Controls.Add(this.GenderInput);
             this.MaximumSize = new System.Drawing.Size(600, 400);
             this.MinimumSize = new System.Drawing.Size(600, 400);
@@ -206,7 +206,7 @@ namespace ТестовоеЗаданиеБД
         #endregion
 
         private System.Windows.Forms.ComboBox GenderInput;
-        private System.Windows.Forms.Button SendBtn;
+        private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.DateTimePicker DateInput;
         private System.Windows.Forms.TextBox NameInput;
         private System.Windows.Forms.Label label1;

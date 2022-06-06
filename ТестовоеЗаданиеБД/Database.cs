@@ -15,24 +15,25 @@ namespace ТестовоеЗаданиеБД
     class Database
     {
         private string connectString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=MyDatabase.mdb";
-        OleDbConnection connection;
+        private OleDbConnection connection;
         public enum GrandRevoke{
             Grand,
             Revoke
         };
 
-        public void OpenConnection()
+        //Открытие и закрытие соединения
+        private void OpenConnection()
         {
             connection = new OleDbConnection(connectString);
             connection.Open();
         }
-
-        public void CloseConnection()
+        private void CloseConnection()
         {
             connection = new OleDbConnection(connectString);
             connection.Close();
         }
 
+        //Выборка должности выбранного сотрудника
         public string SelectJob(int id)
         {
             OleDbCommand command;
@@ -45,6 +46,7 @@ namespace ТестовоеЗаданиеБД
             return currentJob;
         }
 
+        //Выборка списка подразделений
         public List<string> SelectJobPart()
         {
             OleDbCommand command;
@@ -53,7 +55,6 @@ namespace ТестовоеЗаданиеБД
             command = new OleDbCommand(jobparts, connection);
             OleDbDataReader dataReader = command.ExecuteReader();
             List<string> values = new List<string>();
-            int i = 0;
             while(dataReader.Read())
             {
                 values.Add(dataReader.GetValue(0).ToString());
@@ -62,11 +63,13 @@ namespace ТестовоеЗаданиеБД
             return values;
         }
 
-        public void LoadFullList(DataGridView dataTableView)
+        //Выполнение запроса выборки
+        public void SelectQuery(DataGridView dataTableView, string query)
         {
-            Thread.Sleep(800);
+            //Ожидание обновления основной базы для актуальной выборки
+            Thread.Sleep(600);
+            //Выборка
             OpenConnection(); 
-            string query = "SELECT * FROM [Сотрудники]";
             OleDbDataAdapter dataAdapter = new OleDbDataAdapter(query, connection);
             DataSet dataSet = new DataSet();
             dataAdapter.Fill(dataSet, "[Сотрудники]");
@@ -74,32 +77,7 @@ namespace ТестовоеЗаданиеБД
             CloseConnection();
         }
 
-        public void LoadListofJob(DataGridView dataTableView, string condition)
-        {
-            OpenConnection();
-            string query = "SELECT * " +
-                           "FROM [Сотрудники] " +
-                           "WHERE [Должность]='" + condition + "'";
-            OleDbDataAdapter dataAdapter = new OleDbDataAdapter(query, connection);
-            DataSet dataSet = new DataSet();
-            dataAdapter.Fill(dataSet, "[Сотрудники]");
-            dataTableView.DataSource = dataSet.Tables["[Сотрудники]"];
-            CloseConnection();
-        }
-
-        public void LoadListofJobPart(DataGridView dataTableView, string condition)
-        {
-            OpenConnection();
-            string query = "SELECT * " +
-                           "FROM [Сотрудники] " +
-                           "WHERE [Название подразделение]='" + condition + "'";
-            OleDbDataAdapter dataAdapter = new OleDbDataAdapter(query, connection);
-            DataSet dataSet = new DataSet();
-            dataAdapter.Fill(dataSet, "[Сотрудники]");
-            dataTableView.DataSource = dataSet.Tables["[Сотрудники]"];
-            CloseConnection();
-        }
-
+        //Выполнение запроса удаления
         public void DeleteQuery(DataGridView dataTableView)
         {
             OpenConnection();
@@ -122,6 +100,7 @@ namespace ТестовоеЗаданиеБД
             CloseConnection();
         }
 
+        //Выполнение запроса обновления
         public void UpdateQuery(string[] values, int id)
         {
             OpenConnection();
@@ -146,6 +125,7 @@ namespace ТестовоеЗаданиеБД
             */
         }
 
+        //Выполнение запроса вставки
         public void InsertQuery(string[] values)
         {
             OpenConnection();
@@ -160,8 +140,9 @@ namespace ТестовоеЗаданиеБД
             command.ExecuteNonQuery();
 
             CloseConnection();
-        }
+        }   
 
+        //Выполнение запроса повышения/понижения в должности
         public void GrandOrRevokeQuery(GrandRevoke grandRevoke, int id)
         {
             OleDbCommand command;
@@ -191,13 +172,6 @@ namespace ТестовоеЗаданиеБД
                 }
             }
             string query = "UPDATE [Сотрудники] SET [Должность]='" + currentJob + "' WHERE [Код]=@id";
-            /*  
-                query = "UPDATE [Сотрудники] SET " +
-                "[Должность]='" + currentJob + "', " +
-                "[Название подразделение]='" + values[4] + "', " +
-                "[ФИО руководителя]='' " +
-                "WHERE [Код]=@id";
-             */
             OpenConnection();
             command = new OleDbCommand(query, connection);
             command.Parameters.AddWithValue("@id", id);

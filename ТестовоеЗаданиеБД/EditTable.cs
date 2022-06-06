@@ -16,14 +16,16 @@ namespace ТестовоеЗаданиеБД
         private MainForm mainForm;
         Database db = new Database();
 
+        //Конструктор для добавления
         public EditTable(MainForm form)
         {
             InitializeComponent();
             mainForm = form;
-            SendBtn.Text = "Добавить";
+            btnSend.Text = "Добавить";
             InputLeader.Enabled = InputJobPart.Enabled = false;
         }
 
+        //Конструктор для изменений
         public EditTable(MainForm form, DataGridViewRow row)
         {
             InitializeComponent();
@@ -35,17 +37,19 @@ namespace ТестовоеЗаданиеБД
             JobInput.SelectedItem = row.Cells[4].Value.ToString();
             InputJobPart.Text = row.Cells[5].Value.ToString();
             InputLeader.Text = row.Cells[6].Value.ToString();
-            SendBtn.Text = "Изменить";
+            btnSend.Text = "Изменить";
 
         }
 
-        private void SendBtn_Click(object sender, EventArgs e)
+        private void btnSend_Click(object sender, EventArgs e)
         {
-            if(NameInput.Text == "")
+            //Проверка на пустые поля
+            if (NameInput.Text == "")
             {
                 MessageBox.Show("Неоставляйте пустых полей", "Предупреждение", MessageBoxButtons.OK);
                 return;
             }
+            //Считывание значений с формы
             string[] values = {
                     NameInput.Text,
                     DateInput.Value.ToString("d"),
@@ -54,15 +58,17 @@ namespace ТестовоеЗаданиеБД
                     InputJobPart.Text,
                     InputLeader.Text
             };
-            if (SendBtn.Text == "Изменить")
+            //Отправка запросов
+            if (btnSend.Text == "Изменить")
             {
                 db.UpdateQuery(values, id);
             }
-            else if (SendBtn.Text == "Добавить")
+            else if (btnSend.Text == "Добавить")
             {
                 db.InsertQuery(values);
             }
-            db.LoadFullList(mainForm.dataTableView);
+            //Обновление данных на главной форме
+            db.SelectQuery(mainForm.dataTableView, "SELECT * FROM [Сотрудники]");
             this.Dispose();
         }
     }

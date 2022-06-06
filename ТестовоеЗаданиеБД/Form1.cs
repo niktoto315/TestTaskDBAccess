@@ -18,66 +18,66 @@ namespace ТестовоеЗаданиеБД
         public MainForm()
         {
             InitializeComponent();
-            db.LoadFullList(dataTableView);
+            //Заполнение таблицы выборкой из БД
+            db.SelectQuery(dataTableView, "SELECT * FROM [Сотрудники]");
+            //Заполнение коллекции списка подразделений
             foreach (var item in db.SelectJobPart())
             {
-                JobParts.Items.Add(item);
+                jobPartList.Items.Add(item);
             }
         }
 
         //Сброс фильтров
         private void btnClearSelect_Click(object sender, EventArgs e)
         {
-            JobParts.SelectedIndex = Jobs.SelectedIndex = 0;
+            jobPartList.SelectedIndex = jobList.SelectedIndex = 0;
         }
 
         //Фильтр списка по подразделению
-        private void InputJobPart_SelectedIndexChanged(object sender, EventArgs e)
+        private void jobPartList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (JobParts.SelectedItem == JobParts.Items[0])
+            string query = "SELECT * FROM [Сотрудники]";
+            if (jobPartList.SelectedItem != jobPartList.Items[0])
             {
-                db.LoadFullList(dataTableView);
+                query = "SELECT * " +
+                        "FROM [Сотрудники] " +
+                        "WHERE [Название подразделение]='" + jobPartList.SelectedItem.ToString() + "'";
             }
-            else
-            {
-                string condition = JobParts.SelectedItem.ToString();
-                db.LoadListofJobPart(dataTableView, condition);
-            }
+            db.SelectQuery(dataTableView, query);
         }
 
         //Фильтр списка по должности
-        private void JobsSelect_SelectedIndexChanged(object sender, EventArgs e)
+        private void jobList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Jobs.SelectedItem == Jobs.Items[0])
+            string query = "SELECT * FROM [Сотрудники]";
+            if (jobList.SelectedItem != jobList.Items[0])
             {
-                db.LoadFullList(dataTableView);
+                query = "SELECT * " +
+                               "FROM [Сотрудники] " +
+                               "WHERE [Должность]='" + jobList.SelectedItem.ToString() + "'";
             }
-            else
-            {
-                string condition = Jobs.SelectedItem.ToString();
-                db.LoadListofJob(dataTableView, condition);
-            }
+            db.SelectQuery(dataTableView, query);
         }
 
-        //Добавление нового
-        private void buttonInsert_Click(object sender, EventArgs e)
+        //Добавление
+        private void btnInsert_Click(object sender, EventArgs e)
         {
             EditTable editForm = new EditTable(this);
             editForm.Show();
         }
 
         //Изменение
-        private void buttonEdit_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
             EditTable editForm = new EditTable(this, dataTableView.CurrentRow);
             editForm.Show();
         }
 
         //Удаление
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             db.DeleteQuery(dataTableView);
-            db.LoadFullList(dataTableView);
+            db.SelectQuery(dataTableView, "SELECT * FROM [Сотрудники]");
         }
 
         //Повышение
@@ -85,7 +85,7 @@ namespace ТестовоеЗаданиеБД
         {
             int id = Int32.Parse(dataTableView.CurrentRow.Cells[0].Value.ToString());
             db.GrandOrRevokeQuery(Database.GrandRevoke.Grand, id);
-            db.LoadFullList(dataTableView);
+            db.SelectQuery(dataTableView, "SELECT * FROM [Сотрудники]");
         }
 
         //Понижение
@@ -93,7 +93,7 @@ namespace ТестовоеЗаданиеБД
         {
             int id = Int32.Parse(dataTableView.CurrentRow.Cells[0].Value.ToString());
             db.GrandOrRevokeQuery(Database.GrandRevoke.Revoke, id);
-            db.LoadFullList(dataTableView);
+            db.SelectQuery(dataTableView, "SELECT * FROM [Сотрудники]");
         }
 
         //Переключение кнопок в зависимости от должности

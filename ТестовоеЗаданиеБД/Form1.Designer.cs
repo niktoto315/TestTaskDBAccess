@@ -34,12 +34,12 @@ namespace ТестовоеЗаданиеБД
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnInsert = new System.Windows.Forms.Button();
-            this.Jobs = new System.Windows.Forms.ComboBox();
+            this.jobList = new System.Windows.Forms.ComboBox();
             this.btnGrand = new System.Windows.Forms.Button();
             this.btnRevoke = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.JobParts = new System.Windows.Forms.ComboBox();
+            this.jobPartList = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,7 +81,7 @@ namespace ТестовоеЗаданиеБД
             this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "Изменить";
             this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.buttonEdit_Click);
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
@@ -92,7 +92,7 @@ namespace ТестовоеЗаданиеБД
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "Удалить";
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnInsert
             // 
@@ -103,24 +103,24 @@ namespace ТестовоеЗаданиеБД
             this.btnInsert.TabIndex = 4;
             this.btnInsert.Text = "Добавить";
             this.btnInsert.UseVisualStyleBackColor = true;
-            this.btnInsert.Click += new System.EventHandler(this.buttonInsert_Click);
+            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
-            // Jobs
+            // jobList
             // 
-            this.Jobs.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.Jobs.FormattingEnabled = true;
-            this.Jobs.Items.AddRange(new object[] {
+            this.jobList.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.jobList.FormattingEnabled = true;
+            this.jobList.Items.AddRange(new object[] {
             "Все",
             "Директор",
             "Руководитель подразделения",
             "Контроллер",
             "Рабочий"});
-            this.Jobs.Location = new System.Drawing.Point(234, 12);
-            this.Jobs.Name = "Jobs";
-            this.Jobs.Size = new System.Drawing.Size(352, 27);
-            this.Jobs.TabIndex = 5;
-            this.Jobs.Text = "Все";
-            this.Jobs.SelectedIndexChanged += new System.EventHandler(this.JobsSelect_SelectedIndexChanged);
+            this.jobList.Location = new System.Drawing.Point(234, 12);
+            this.jobList.Name = "jobList";
+            this.jobList.Size = new System.Drawing.Size(352, 27);
+            this.jobList.TabIndex = 5;
+            this.jobList.Text = "Все";
+            this.jobList.SelectedIndexChanged += new System.EventHandler(this.jobList_SelectedIndexChanged);
             // 
             // btnGrand
             // 
@@ -164,18 +164,18 @@ namespace ТестовоеЗаданиеБД
             this.label2.TabIndex = 11;
             this.label2.Text = "Подразделение:\r\n";
             // 
-            // JobParts
+            // jobPartList
             // 
-            this.JobParts.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.JobParts.FormattingEnabled = true;
-            this.JobParts.Items.AddRange(new object[] {
+            this.jobPartList.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.jobPartList.FormattingEnabled = true;
+            this.jobPartList.Items.AddRange(new object[] {
             "Все"});
-            this.JobParts.Location = new System.Drawing.Point(234, 45);
-            this.JobParts.Name = "JobParts";
-            this.JobParts.Size = new System.Drawing.Size(352, 27);
-            this.JobParts.TabIndex = 10;
-            this.JobParts.Text = "Все";
-            this.JobParts.SelectedIndexChanged += new System.EventHandler(this.InputJobPart_SelectedIndexChanged);
+            this.jobPartList.Location = new System.Drawing.Point(234, 45);
+            this.jobPartList.Name = "jobPartList";
+            this.jobPartList.Size = new System.Drawing.Size(352, 27);
+            this.jobPartList.TabIndex = 10;
+            this.jobPartList.Text = "Все";
+            this.jobPartList.SelectedIndexChanged += new System.EventHandler(this.jobPartList_SelectedIndexChanged);
             // 
             // MainForm
             // 
@@ -183,11 +183,11 @@ namespace ТестовоеЗаданиеБД
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(916, 461);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.JobParts);
+            this.Controls.Add(this.jobPartList);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRevoke);
             this.Controls.Add(this.btnGrand);
-            this.Controls.Add(this.Jobs);
+            this.Controls.Add(this.jobList);
             this.Controls.Add(this.btnInsert);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
@@ -211,12 +211,12 @@ namespace ТестовоеЗаданиеБД
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnInsert;
-        private System.Windows.Forms.ComboBox Jobs;
+        private System.Windows.Forms.ComboBox jobList;
         private System.Windows.Forms.Button btnGrand;
         private System.Windows.Forms.Button btnRevoke;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox JobParts;
+        private System.Windows.Forms.ComboBox jobPartList;
     }
 }
 
