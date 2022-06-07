@@ -51,6 +51,7 @@ namespace ТестовоеЗаданиеБД
         {
             OleDbCommand command;
             OpenConnection();
+            //я не знаю чего ему надо, как говорится вчера is not null работало, а сегодня то ли access умный то ли я не понимаю его
             string jobparts = "SELECT DISTINCT [Название подразделение] FROM [Сотрудники] WHERE [Название подразделение] IS NOT NULL";
             command = new OleDbCommand(jobparts, connection);
             OleDbDataReader dataReader = command.ExecuteReader();
